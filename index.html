@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .modal{
+      border-radius: 20px;
+      padding: 10px;
+      display: block;
+      width: 95%;
+      height: 90%;
+      background-color: rgb(47, 102, 157);
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      z-index: 999;
+      transform: translateX(-50%); /* Pastikan benar-benar di tengah */
+
+    }
+    .anakModal{
+      border-radius: 20px;
+      padding: 10px;
+      display: block;
+      width: 90%;
+      height: 85%;
+      background-color: rgb(41, 142, 84);
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      z-index: 999;
+      transform: translateX(-50%); /* Pastikan benar-benar di tengah */
+
+    }
+
+
+    .cucuModal{
+      border-radius: 20px;
+      padding: 10px;
+      display: block;
+      width: 85%;
+      height: 80%;
+      background-color: rgb(105, 49, 195);
+      position: fixed;
+      top: 50px;
+      left: 50%;
+      z-index: 999;
+      transform: translateX(-50%); /* Pastikan benar-benar di tengah */
+
+    }
+
+    .cicitModal{
+      border-radius: 20px;
+      padding: 10px;
+      display: block;
+      width: 80%;
+      height: 75%;
+      background-color: rgb(200, 18, 100);
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      z-index: 999;
+      transform: translateX(-50%); /* Pastikan benar-benar di tengah */
+
+    }
+
+
+    .modal p {
+      position: absolute;
+      top: 10px; /* Jarak dari atas modal */
+      right: 10px; /* Jarak dari kanan modal */
+      margin: 0; /* Hapus margin default */
+      cursor: pointer; /* Tunjukkan bahwa bisa diklik */
+      font-weight: bold; /* Buat "x" lebih jelas */
+      font-size: 40px;
+      padding-right: 15px;
+    }
+
+
+   
+  </style>
+  <title>modal nih bos</title>
+</head>
+<body>
+
+  <div class="tempatModal" id="tempatModal">
+   
+  </div>
+
+
+  <h3 onclick="ngefetch()">klik modal</h3>
+
+  
+  
+</body>
+<script>
+  
+
+
+  const tempatModal = document.getElementById('tempatModal')
+
+
+  function ngefetch(){
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => tampil(json.title))
+
+  }
+
+
+  function tampil(title) {
+    
+    
+    tempatModal.innerHTML=` <div class="modal">
+      <p onClick="tutup()"">x</p>
+      <h1 onClick="ngefetchAnakModal()">${title}</h1>
+      <div id="tempatAnakModal">
+        
+      </div>
+    </div>`
+
+  
+  }
+
+
+  function ngefetchAnakModal() {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => tampilAnakModal(json.title))
+  }
+
+  
+  function tampilAnakModal(title) {
+    const tempatAnakModal =  document.getElementById('tempatAnakModal');
+    tempatAnakModal.innerHTML = `
+      <div class="anakModal">
+         <p onClick="tutupAnakModal()"">x</p>
+         <h3 onClick="tampilCucuModal()">${title}</h3>
+         <div id="tempatCucuModal">
+         </div>
+      </div>
+      `
+
+  }
+
+  function tampilCucuModal() {
+    const tempatCucuModal =  document.getElementById('tempatCucuModal');
+    tempatCucuModal.innerHTML = `
+      <div class="cucuModal">
+         <p onClick="tutupCucuModal()">x</p>
+         <h3 onClick="tampilCicitModal()">cucu modal nih</h3>
+         <div id="tempatCicitModal">
+         </div>
+      </div>
+    `
+  }
+
+
+  function tampilCicitModal() {
+    const tempatCicitModal =  document.getElementById('tempatCicitModal');
+    tempatCicitModal.innerHTML = `
+     <div class="cicitModal">
+         <p onClick="tutupCicitModal()">x</p>
+         <h3>cicit modal nih</h3>
+         <div>
+         </div>
+      </div>
+    `
+  }
+
+  function tutup() {
+    tempatModal.innerHTML = ""
+  }
+
+  function tutupAnakModal() {
+    tempatAnakModal.innerHTML = ""
+  }
+
+  function tutupCucuModal() {
+    tempatCucuModal.innerHTML = ""
+  }
+
+  function tutupCicitModal() {
+    tempatCicitModal.innerHTML = ""
+  }
+
+
+</script>
+</html>
