@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diskotik</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Optional: Hide scrollbars */
+    }
+  </style>
+</head>
+<body>
+  
+</body>
+
+<script>
+  function getRandomColor() {
+    return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+  }
+
+  // Change background color every 200ms
+  setInterval(() => {
+    document.body.style.backgroundColor = getRandomColor();
+  }, 200);
+
+  // Toggle fullscreen mode
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      // Request fullscreen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+      }
+    } else {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  // Listen for the 'g' key to toggle fullscreen
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'g' || event.key === 'G') {
+      toggleFullscreen();
+    }
+  });
+</script>
+
+</html>

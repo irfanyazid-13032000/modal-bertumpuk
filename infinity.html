@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    #modalsContainer{
+      overflow: scroll;
+    }
+    /* Basic styling for modal elements */
+    .modal {
+      border-radius: 20px;
+      padding: 10px;
+      display: block;
+      position: fixed;
+      left: 50%;
+      z-index: 999;
+      transform: translateX(-50%);
+    }
+    .modal p {
+      cursor: pointer;
+    }
+  </style>
+  <title>Modal Infinity</title>
+</head>
+<body>
+
+  <div id="modalsContainer"></div>
+
+  <h3 onclick="tampil()">Klik Modal</h3>
+
+</body>
+<script>
+  function getRandomColor() {
+    return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+  }
+
+  let qty = 0
+
+
+  function tampil() {
+    qty++
+    const modalsContainer = document.getElementById('modalsContainer');
+    modalsContainer.innerHTML = ''; // Clear previous modals
+    let width = 95;
+    let height = 90;
+    let top = 30;
+
+    if (qty > 6) {
+      qty = 0
+    }
+
+    for (let ke = 0; ke < qty; ke++) {
+      width = width - ke * 5
+      height = height - ke * 5
+      top = top + ke * 25;
+      let widthKe = width - ke * 5;
+      let heightKe = height - ke * 5;
+
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.style.width = `${width - ke * 5/100 * widthKe}%`;
+      modal.style.height = `${height - ke * 5/100 * heightKe}%`;
+      modal.style.backgroundColor = getRandomColor();
+      modal.style.top = `${top}px`;
+      modal.innerHTML = `
+        <p onclick="tutup()">x</p>
+        <h1>Haduh</h1>
+        <div id="tempatModal-${ke+1}"></div>
+      `;
+      modalsContainer.appendChild(modal);
+    }
+  }
+
+
+  setInterval(() => {
+    tampil()
+  }, 200);
+
+
+  function tutup() {
+    const modalsContainer = document.getElementById('modalsContainer');
+    modalsContainer.innerHTML = ''; // Close all modals
+  }
+</script>
+</html>
